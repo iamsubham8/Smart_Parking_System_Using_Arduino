@@ -14,6 +14,7 @@
 ✅ Displays a "Parking Full" message when slots are full.
 
 
+
 🧰 Hardware Requirements
 
 🖥️ Arduino Uno (https://amzn.to/3mhamzG)
@@ -41,6 +42,7 @@
 💡 Make sure to install the correct board drivers (e.g., Arduino Uno)
 
 
+
 📚 2. Required Arduino Libraries
 
 Install these libraries via Sketch > Include Library > Manage Libraries...
@@ -51,22 +53,47 @@ Install these libraries via Sketch > Include Library > Manage Libraries...
 
 
 
+
 🔁 Flow of project
 
 🚗 Car approaches → IR1 triggered.
+
 ✅ If space → Servo opens gate, car enters, slots decrease.
+
 📟 LCD updates slot count.
+
 🚙 Car leaves → IR2 triggered.
+
 🔄 Servo opens again, slot count increases.
+
 🔒 Gate closes after every action.
+
+
 
 
 🎯 Project Outcomes
 
 🚗 Efficient Parking Management.
+
 🛡️ Automation & Security.
+
 ⚡ Energy Efficient.
+
 🧠 Hands-On Embedded System Skills.
+
+
+
+👇View Project
+
+
+https://drive.google.com/file/d/1-d3uO_dHZiT2HBuKDGN87n9jB-kpRD13/view?usp=drive_link
+
+
+https://drive.google.com/file/d/1AunYTzLVWaEJjLHh9UY56zF0J9_wcNMO/view?usp=drive_link
+
+
+https://drive.google.com/file/d/1Vis0RZh4hqqxfKXXAC0culxuiW-BFtFq/view?usp=drive_link
+
 
 
 
