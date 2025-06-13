@@ -6,17 +6,24 @@
 🛠️ Features
 
 ✅ Detects car entry and exit using IR sensors.
+
 ✅ Controls entry gate via servo motor.
+
 ✅ Displays available parking slots on an LCD.
+
 ✅ Displays a "Parking Full" message when slots are full.
 
 
 🧰 Hardware Requirements
 
 🖥️ Arduino Uno (https://amzn.to/3mhamzG)
+
 👁️‍🗨️ Sensors - IR or ultrasonic for entry & exit (https://amzn.to/3Kjn6P6)
+
 ⚙️ Servo Motor (https://amzn.to/3PqtfMt)
+
 📟 LCD Display (https://amzn.to/41tQkCG)
+
 🔌 Jumper wires and breadboard (https://amzn.to/3GvV1SW)
 
 🛒 Optional: You can also add a buzzer 🔊 or LEDs 💡 for alerts and indicators!
@@ -26,14 +33,22 @@
 💻 Software Requirements
 
 🧠 1. Arduino IDE
+
 📥 Download: https://www.arduino.cc/en/software
+
 ✅ Use it to write, compile, and upload code to the Arduino board.
+
 💡 Make sure to install the correct board drivers (e.g., Arduino Uno)
 
+
 📚 2. Required Arduino Libraries
+
 Install these libraries via Sketch > Include Library > Manage Libraries...
+
 👉LiquidCrystal_I2C - I2C	For controlling the 16x2 LCD with I2C module.
+
 👉Servo - To control the servo motor for gate operation.
+
 
 
 🔁 Flow of project
