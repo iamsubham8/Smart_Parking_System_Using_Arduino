@@ -1,0 +1,105 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+#include <Servo.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+Servo myservo;
+
+int IR1 = 2;  // Entry sensor
+int IR2 = 3;  // Exit sensor
+
+int totalSlots = 4;
+int availableSlots = 4;
+
+int lastDisplayedSlots = -1;
+
+void setup() {
+  Serial.begin(9600);
+
+  lcd.init();
+  lcd.backlight();
+
+  pinMode(IR1, INPUT_PULLUP);
+  pinMode(IR2, INPUT_PULLUP);
+
+  myservo.attach(5);
+  myservo.write(0);  // Gate closed position
+
+  lcd.setCursor(0, 0);
+  lcd.print("     ARDUINO    ");
+  lcd.setCursor(0, 1);
+  lcd.print(" PARKING SYSTEM ");
+  delay(2000);
+  lcd.clear();
+}
+
+void loop() {
+  bool ir1Triggered = digitalRead(IR1) == LOW;
+  bool ir2Triggered = digitalRead(IR2) == LOW;
+
+  // Entry logic
+  if (ir1Triggered && availableSlots > 0) {
+    delay(100);  // Debounce
+    if (digitalRead(IR1) == LOW) {
+      myservo.write(90);  // Open gate
+      Serial.println("Vehicle IN");
+      
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("  Vehicle IN     ");
+      lcd.setCursor(0, 1);
+      lcd.print("Slot Left: ");
+      lcd.print(availableSlots - 1);
+      delay(2000);
+
+      myservo.write(0);  // Close gate
+      availableSlots--;
+      lcd.clear();
+    }
+  }
+
+  // No slot available
+  if (ir1Triggered && availableSlots == 0) {
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("    SORRY :(    ");
+    lcd.setCursor(0, 1);
+    lcd.print("  Parking Full  ");
+    delay(3000);
+    lcd.clear();
+  }
+
+  // Exit logic
+  if (ir2Triggered && availableSlots < totalSlots) {
+    delay(100);
+    if (digitalRead(IR2) == LOW) {
+      myservo.write(90);  // Open gate
+      Serial.println("Vehicle OUT");
+
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("  Vehicle OUT    ");
+      lcd.setCursor(0, 1);
+      lcd.print("Slot Left: ");
+      lcd.print(availableSlots + 1);
+      delay(2000);
+
+      myservo.write(0);  // Close gate
+      availableSlots++;
+      lcd.clear();
+    }
+  }
+
+  // Display status only if slots have changed
+  if (availableSlots != lastDisplayedSlots) {
+    lcd.setCursor(0, 0);
+    lcd.print(" WELCOME! ");
+    lcd.setCursor(0, 1);
+    lcd.print("Slot Left: ");
+    lcd.print(availableSlots);
+    lcd.print("   ");
+    lastDisplayedSlots = availableSlots;
+  }
+
+  delay(200);
+}
